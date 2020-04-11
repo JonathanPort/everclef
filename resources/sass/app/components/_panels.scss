@@ -1,0 +1,23 @@
+.panel {
+    @include panel();
+    width: 100%;
+    overflow: hidden;
+}
+
+.panel__header {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 2px solid $color--panel-border;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel__body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

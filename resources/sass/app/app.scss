@@ -1,0 +1,42 @@
+
+/**
+ * Setup
+ */
+@import
+    './setup/libs',
+    './../core/colors',
+    './../core/fonts',
+    './../core/mixins',
+    './setup/base';
+
+/**
+ * Components
+ */
+@import
+    './components/buttons',
+    './components/forms',
+    './components/tables',
+    './components/alerts',
+    './components/panels',
+    './components/notifications',
+    './components/view-header';
+
+/**
+ * Includes
+ */
+@import
+    './includes/header',
+    './includes/sidebar',
+    './includes/filters',
+    './includes/filter-menu',
+    './includes/action-menu',
+    './includes/lyrics-editor',
+    './includes/lyrics',
+    './includes/set-list-maker',
+    './includes/lyrics-coverflow';
+
+/**
+ * Views
+ */
+// @import
+    // './views/home';

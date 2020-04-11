@@ -1,0 +1,46 @@
+@mixin absoluteFit() {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@mixin wrap() {
+
+    $horizontalPadding: 40px;
+
+    // max-width: calc(1800px + #{$horizontalPadding} + #{$horizontalPadding});
+    margin: auto;
+    width: 100%;
+    padding-left: $horizontalPadding;
+    padding-right: $horizontalPadding;
+
+    @media screen and (max-width: 768px) {
+        $horizontalPadding: 30px;
+        padding-left: $horizontalPadding;
+        padding-right: $horizontalPadding;
+    }
+
+    @media screen and (max-width: 480px) {
+        $horizontalPadding: 20px;
+        padding-left: $horizontalPadding;
+        padding-right: $horizontalPadding;
+    }
+
+}
+
+
+@mixin bgImage() {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+@mixin panel() {
+    background-color: $color--panel-bg;
+    border: 2px solid $color--panel-border;
+    border-radius: 10px;
+}

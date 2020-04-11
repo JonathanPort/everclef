@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\RepertoireController;
+use App\Http\Controllers\CoverController;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\SetListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +22,57 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    dd(\Auth::user());
-})->name('home');
+Route::prefix('/repertoire')->group(function () {
+
+    Route::get('/', [RepertoireController::class, 'index'])->name('repertoire');
+
+});
+
+Route::prefix('/covers')->group(function () {
+
+    Route::get('/', [CoverController::class, 'index'])->name('covers');
+
+    Route::get('/add', [CoverController::class, 'showCreateView'])->name('cover.create');
+    Route::post('/create', [CoverController::class, 'create'])->name('cover.create.submit');
+
+    Route::get('/edit/{cover}', [CoverController::class, 'showEditView'])->name('cover.edit');
+    Route::post('/edit/{cover}', [CoverController::class, 'edit'])->name('cover.edit.submit');
+
+    Route::get('/delete/{cover}', [CoverController::class, 'delete'])->name('cover.delete');
+
+    Route::get('/lyrics-search', [CoverController::class, 'lyricsSearch']);
+
+    Route::get('/get-lyrics', [CoverController::class, 'getLyrics']);
+
+    Route::get('/{cover}', [CoverController::class, 'showCoverView'])->name('cover.show');
+
+});
+
+Route::prefix('/tags')->group(function () {
+
+    Route::get('/', [TagsController::class, 'index'])->name('tags');
+
+    Route::get('/edit/{tag}', [TagsController::class, 'showEditView'])->name('tag.edit');
+    Route::post('/edit/{tag}', [TagsController::class, 'edit'])->name('tag.edit.submit');
+
+});
+
+
+Route::prefix('/set-lists')->group(function () {
+
+    Route::get('/', [SetListController::class, 'index'])->name('set-lists');
+
+    Route::post('/create', [SetListController::class, 'create'])->name('set-list.create');
+
+    Route::post('/update/{setList}', [SetListController::class, 'update'])->name('set-list.update');
+
+    Route::get('/{setList}', [SetListController::class, 'show'])->name('set-lists.show');
+
+    Route::get('/delete/{setList}', [SetListController::class, 'delete'])->name('set-list.delete');
+
+});
+
+
 
 Auth::routes();
 

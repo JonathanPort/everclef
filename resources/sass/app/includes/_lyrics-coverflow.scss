@@ -1,0 +1,216 @@
+.lyrics-coverflow {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+}
+
+.lyrics-coverflow__swiper {
+    width: 48vw;
+    margin: auto;
+
+    .swiper-slide {
+        height: auto;
+        transition: transform 0.2s, opacity 0.2s, z-index 0.3s;
+    }
+
+    .swiper-slide-next-out {
+        opacity: 0;
+        transform: translateX(calc(-250% + 80px)) translateY(150px);
+        z-index: 1;
+    }
+
+    .swiper-slide-prev-out {
+        opacity: 0;
+        transform: translateX(calc(250% + 80px)) translateY(150px);
+        z-index: 1;
+    }
+
+    .swiper-slide-nth-next-2 {
+        opacity: 0.25;
+        transform: translateX(calc(-180% + 80px)) translateY(100px);
+        z-index: 1;
+    }
+
+    .swiper-slide-nth-prev-2 {
+        opacity: 0.25;
+        transform: translateX(calc(180% - 80px)) translateY(100px);
+        z-index: 1;
+    }
+
+    .swiper-slide-next {
+        opacity: 0.80;
+        transform: translateX(calc(-100% + 125px)) translateY(50px);
+        z-index: 2;
+    }
+
+    .swiper-slide-prev {
+        opacity: 0.80;
+        transform: translateX(calc(100% - 125px)) translateY(50px);
+        z-index: 2;
+    }
+
+    .swiper-slide-active {
+        z-index: 3;
+        transform: none;
+        opacity: 1;
+
+        .lyrics-coverflow__sheet-actions {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lyrics-coverflow__sheet {
+            &:hover {
+                transform: scale(1.01);
+            }
+        }
+
+    }
+
+}
+
+.lyrics-coverflow__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 48vw;
+    margin: auto;
+    margin-bottom: 35px;
+}
+
+.lyrics-coverflow__tags {
+    font-weight: $font-weight--bold;
+    font-size: 14px;
+    color: $color--brand-primary;
+    display: flex;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        margin-right: 5px;
+    }
+}
+
+.lyrics-coverflow__pagination {
+    font-weight: $font-weight--bold;
+    font-size: 14px;
+    color: $color--text-secondary;
+}
+
+
+.lyrics-coverflow__sheet {
+    box-shadow: 0 13px 21px -11px rgba(0,0,0,0.50);
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.2s;
+
+    .panel__header {
+        padding-left: 40px;
+    }
+
+    .panel__body {
+        padding-top: 35px;
+        padding-bottom: 35px;
+        padding-left: 40px;
+        padding-right: 40px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+}
+
+.lyrics-coverflow__sheet-title {
+    font-weight: $font-weight--bold;
+    font-size: 16px;
+    color: $color--heading;
+
+    a {
+        color: $color--heading;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+}
+
+.lyrics-coverflow__sheet-actions {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+
+    display: flex;
+    align-items: center;
+
+    .action-menu__bg {
+        background-color: transparent !important;
+    }
+}
+
+.lyrics-coverflow__sheet-action-icon {
+    max-width: 18px;
+    margin-left: 20px;
+}
+
+.lyrics-coverflow__sheet-body {}
+
+
+.lyrics-coverflow__nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 35%;
+    transform: translateY(-50%);
+    width: calc(100% - 80px);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    pointer-events: none;
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        pointer-events: initial;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        border-radius: 50%;
+        overflow: hidden;
+        user-select: none;
+        outline: none;
+        transition: all 0.1s;
+
+        img {
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        &:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+    }
+
+    .swiper-button-prev {}
+
+    .swiper-button-next {
+        img {
+            transform: rotate(180deg);
+        }
+    }
+
+    .swiper-button-disabled {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
+

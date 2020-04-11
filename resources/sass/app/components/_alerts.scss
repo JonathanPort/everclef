@@ -1,0 +1,22 @@
+.alert {}
+
+.alert__inner {
+    @include wrap();
+}
+
+.alert__panel {
+    // background-color: $black;
+    border-radius: 4px;
+    padding: 30px;
+    max-width: 920px;
+
+    p {
+        font-size: 16px;
+        line-height: 26px;
+        // color: $white;
+    }
+}
+
+.alert__close {
+    margin-top: 20px;
+}

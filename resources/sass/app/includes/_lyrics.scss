@@ -1,0 +1,57 @@
+.lyrics {}
+
+.lyrics__inner {
+    @include wrap();
+    max-width: 750px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.lyrics__header {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lyrics__header-left {}
+
+.lyrics__header-artist {
+    font-weight: $font-weight--bold;
+    font-size: 17px;
+    color: $color--brand-primary;
+    display: block;
+    text-decoration: none;
+}
+
+.lyrics__header-title {
+    font-weight: $font-weight--bold;
+    font-size: 31px;
+    color: $color--heading;
+    margin-bottom: 10px;
+}
+
+.lyrics__header-tags {
+    font-weight: $font-weight--semibold;
+    font-size: 16px;
+    color: $color--text-primary;
+}
+
+.lyrics__header-right {}
+
+.lyrics__main {
+    font-weight: $font-weight--semibold !important;
+    font-size: 16px !important;
+    color: $color--heading !important;
+    line-height: 1.6 !important;
+
+    p {
+        margin-bottom: 20px !important;
+        font-weight: $font-weight--semibold !important;
+        font-size: 16px !important;
+        color: $color--heading !important;
+        line-height: 1.6 !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+}

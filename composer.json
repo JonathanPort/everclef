@@ -15,7 +15,9 @@
         "laravel/framework": "^7.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0"
+        "laravel/ui": "^2.0",
+        "lasserafn/php-initial-avatar-generator": "^4.1",
+        "paquettg/php-html-parser": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

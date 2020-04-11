@@ -1,0 +1,96 @@
+.lyrics-editor {
+
+    .ql-toolbar {
+        border: none;
+        font-family: inherit;
+        padding-left: 27px;
+        padding-right: 17px;
+        background-color: $color--panel-contrast-2;
+        border-bottom: 2px solid $color--panel-border;
+    }
+
+    .ql-toolbar button {
+        height: 30px;
+        margin: 0px;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        transition: none;
+        border-radius: 50%;
+        margin-right: 15px;
+        outline: none !important;
+
+        svg {
+            width: 20px;
+            height: auto;
+        }
+
+        &:hover {
+            background-color: $color--panel-contrast !important;
+            color: $color--brand-primary;
+        }
+
+        &:active {
+            background-color: darken($color--panel-contrast, 5%) !important;
+            color: $color--brand-primary;
+        }
+
+        &.ql-active {
+            background-color: darken($color--panel-contrast, 5%) !important;
+            color: $color--brand-primary;
+        }
+    }
+
+    .ql-container {
+        border: none;
+        font-family: inherit;
+        font-weight: $font-weight--semibold;
+        background-color: $color--panel-contrast-2;
+        font-size: 16px;
+        color: $color--text-primary;
+        letter-spacing: 0;
+        min-height: 60vh;
+        outline: none !important;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .ql-editor {
+        padding: 0px;
+        &:before {
+            padding-left: 25px;
+        }
+    }
+
+}
+
+.trumbowyg-button-pane .trumbowyg-button-group:not(:last-child) {
+    margin-right: 20px;
+}
+
+.trumbowyg-editor {
+    font-weight: $font-weight--semibold;
+    font-size: 16px;
+    color: $color--text-primary;
+    letter-spacing: 0;
+    min-height: 60vh;
+
+    hr {
+        border: 2px solid $color--panel-border;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+
+    blockquote {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-left: 2px solid $color--panel-border;
+    }
+
+}

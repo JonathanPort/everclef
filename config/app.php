@@ -227,6 +227,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Custom
+        'QueryString' => App\Helpers\QueryStringHelper::class,
+        'Tag' => App\Helpers\TagHelper::class,
+        'SetList' => App\Helpers\SetListHelper::class,
+
     ],
 
 ];

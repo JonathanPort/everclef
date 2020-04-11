@@ -1,0 +1,118 @@
+$table--horizontal-row-padding: 40px;
+$table--horizontal-column-padding: 10px;
+// $table--horizontal-column-padding: 5%;
+
+.table {
+    background-color: $color--panel-bg;
+    border: 2px solid $color--panel-border;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.table__elem {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 768px;
+}
+
+.table__head {
+    border-bottom: 2px solid $color--panel-border;
+    // background-color: $color--panel-contrast-2;
+
+    tr {}
+
+    th {
+        padding-left: $table--horizontal-column-padding;
+        padding-right: $table--horizontal-column-padding;
+
+        &:first-child {
+            padding-left: $table--horizontal-row-padding;
+        }
+
+        &:last-child {
+            padding-right: $table--horizontal-row-padding;
+        }
+
+        padding-top: 14px;
+        padding-bottom: 12px;
+        text-align: left;
+        font-weight: $font-weight--bold;
+        font-size: 16px;
+        color: $color--heading;
+        text-transform: uppercase;
+
+        a {
+            color: $color--heading;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+.table__body {}
+
+.table__row {
+
+    &:not(:last-child) {
+        border-bottom: 2px solid $color--panel-border;
+    }
+
+}
+
+.table__column {
+    width: auto;
+    position: relative;
+    padding-left: $table--horizontal-column-padding;
+    padding-right: $table--horizontal-column-padding;
+
+    &:first-child {
+        padding-left: $table--horizontal-row-padding;
+    }
+
+    &:last-child {
+        padding-right: $table--horizontal-row-padding;
+    }
+
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-weight: $font-weight--semibold;
+    font-size: 16px;
+    color: $color--text-primary;
+
+    > a {
+        text-decoration: none;
+        color: $color--text-primary;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .tag {
+        max-width: 80px;
+        display: inline-block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+}
+
+.table__action-icon {
+    width: 24px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+
+.table__no-results {
+    text-align: center;
+    font-weight: $font-weight--bold;
+    font-size: 22px;
+    line-height: 1.8;
+    color: $color--text-primary;
+    margin-top: 100px;
+}

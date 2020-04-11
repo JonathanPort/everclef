@@ -15,8 +15,9 @@ class CreateSocialCredentialsTable extends Migration
     {
         Schema::create('social_credentials', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('access_token')->nullable();
             $table->string('expires_at')->nullable();

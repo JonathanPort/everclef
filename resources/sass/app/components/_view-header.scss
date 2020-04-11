@@ -1,0 +1,23 @@
+.view-header {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.view-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.view-header__heading {
+    font-weight: $font-weight--bold;
+    font-size: 31px;
+    color: $color--heading;
+    flex: 1;
+}
+
+.view-header__btn {}
+
+.view-header__search {
+    min-width: 300px;
+}

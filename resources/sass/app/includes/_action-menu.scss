@@ -1,0 +1,118 @@
+.action-menu {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 10;
+    position: relative;
+
+    &--open {
+        opacity: 1;
+        visibility: visible;
+
+        .action-menu__main {
+            opacity: 1;
+            transform: scale(1) !important;
+        }
+    }
+
+    &--right {
+
+        .action-menu__main {
+            left: auto;
+            right: -20px;
+
+            &:before {
+                right: 20px;
+                left: auto;
+            }
+        }
+
+    }
+
+    &--left {
+
+        .action-menu__main {
+            right: auto;
+            left: -20px;
+
+            &:before {
+                left: 20px;
+                right: auto;
+            }
+        }
+
+    }
+
+}
+
+.action-menu__bg {
+    @include absoluteFit();
+    position: fixed;
+    background-color: rgba($color--general-black, 0.05);
+    cursor: pointer;
+    z-index: 4;
+}
+
+.action-menu__main {
+    position: absolute;
+    top: 30px;
+    background-color: rgba($color--panel-bg, 0.95);
+    border: 1px solid $color--panel-border;
+    box-shadow: 0 2px 28px -12px rgba(0,0,0,0.50);
+    width: 200px;
+    border-radius: 11px;
+    z-index: 5;
+
+    transform: scale(.8) translate(-10%,-10%);
+    opacity: 0;
+    transition: all .25s cubic-bezier(.24,.22,.015,1.56),opacity .1s ease-in-out;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -21px;
+        margin: auto;
+        width: 0;
+        height: 0;
+        border-left: 11px solid transparent;
+        border-right: 11px solid transparent;
+
+        border-bottom: 21px solid $color--panel-border;
+    }
+}
+
+
+.action-menu__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: $font-weight--semibold;
+    font-size: 16px;
+    color: $color--text-primary;
+    text-decoration: none !important;
+    cursor: pointer;
+
+    &:first-child {
+        border-radius: 11px 11px 0px 0px;
+    }
+
+    &:last-child {
+        border-radius: 0px 0px 11px 11px;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $color--panel-border;
+    }
+
+    &:hover {
+        background-color: $color--brand-primary;
+        color: $color--text-light;
+    }
+
+}
