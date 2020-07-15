@@ -58,39 +58,22 @@
 
     .ql-editor {
         padding: 0px;
+
+        p {
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .new-line {
+            height: 0px;
+            width: 0px;
+            margin: 0;
+            padding: 0;
+        }
+
         &:before {
             padding-left: 25px;
         }
-    }
-
-}
-
-.trumbowyg-button-pane .trumbowyg-button-group:not(:last-child) {
-    margin-right: 20px;
-}
-
-.trumbowyg-editor {
-    font-weight: $font-weight--semibold;
-    font-size: 16px;
-    color: $color--text-primary;
-    letter-spacing: 0;
-    min-height: 60vh;
-
-    hr {
-        border: 2px solid $color--panel-border;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-
-    blockquote {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 40px;
-        padding-right: 40px;
-        border-left: 2px solid $color--panel-border;
     }
 
 }

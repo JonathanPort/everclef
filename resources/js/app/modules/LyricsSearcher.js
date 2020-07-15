@@ -151,7 +151,7 @@ export default class LyricsSearcher extends Module {
                 this.titleInput.value = result.title;
                 this.artistInput.value = result.artist;
 
-                Everclef.Modules.LyricsEditor.root.innerHTML = result2.data;
+                Everclef.Modules.LyricsEditor.addLyrics(result2.data.lyrics);
 
                 this.hideSearchResults();
                 this.hideLoadingState();

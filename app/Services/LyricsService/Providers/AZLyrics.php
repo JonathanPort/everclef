@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\LyricsService\Providers;
 
+use App\Services\LyricsService\LyricsInterface;
+use App\Services\LyricsService\Lyric;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Collection;
 use PHPHtmlParser\Dom;
-use Str;
 
-class AZLyricsService
+
+class AZLyrics implements LyricsInterface
 {
 
     private const SEARCH_BASE_ENDPOINT = 'https://search.azlyrics.com/';
     private const LYRICS_BASE_ENDPOINT = 'https://www.azlyrics.com/lyrics/';
 
-    public function search(string $query)
+    public function search(string $query) : Collection
     {
 
         $response = Http::get($this->searchEndpoint($query));
@@ -23,11 +26,10 @@ class AZLyricsService
         $trs = $dom->find('tr');
 
         $matches = [];
-        $criteria = self::LYRICS_BASE_ENDPOINT;
 
         foreach ($trs as $tr) {
 
-            $match = new AZLyric;
+            $match = new Lyric;
 
             $tr = (new Dom)->load($tr->innerHtml);
 
@@ -58,7 +60,7 @@ class AZLyricsService
     }
 
 
-    public function getLyrics(string $href)
+    public function getLyrics(string $href) : Lyric
     {
 
         $response = Http::get($this->lyricsEndpoint($href));
@@ -77,7 +79,11 @@ class AZLyricsService
 
         if (! isset($divs[4])) return false;
 
-        return $divs[4]->innerHtml;
+        $lyric = new Lyric;
+
+        $lyric->lyrics = $this->formatLyrics($divs[4]->innerHtml);
+
+        return $lyric;
 
     }
 
@@ -96,16 +102,18 @@ class AZLyricsService
 
     }
 
-}
 
+    private function formatLyrics(string $lyrics)
+    {
 
-class AZLyric
-{
+        $lyrics = str_replace('<br /> <br />', '|break|', $lyrics);
 
-    public $title = null;
-    public $artist = null;
-    public $album = null;
-    public $href = null;
-    public $lyrics = null;
+        $lyrics = str_replace('<br />', '<pre class="new-line"></pre>', $lyrics);
+
+        $lyrics = str_replace('|break|', '<br>', $lyrics);
+
+        return $lyrics;
+
+    }
 
 }

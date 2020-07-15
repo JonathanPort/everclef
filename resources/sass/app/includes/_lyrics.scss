@@ -2,7 +2,7 @@
 
 .lyrics__inner {
     @include wrap();
-    max-width: 750px;
+    // max-width: 750px;
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -41,17 +41,24 @@
 
 .lyrics__main {
     font-weight: $font-weight--semibold !important;
-    font-size: 16px !important;
+    font-size: 18px !important;
     color: $color--heading !important;
-    line-height: 1.6 !important;
+    line-height: 1.7 !important;
 
     p {
-        margin-bottom: 20px !important;
+        margin-bottom: 0px !important;
         font-weight: $font-weight--semibold !important;
-        font-size: 16px !important;
+        font-size: 18px !important;
         color: $color--heading !important;
-        line-height: 1.6 !important;
+        line-height: 1.7 !important;
         height: auto !important;
         overflow: visible !important;
+    }
+
+    .new-line {
+        height: 0px;
+        width: 0px;
+        margin: 0;
+        padding: 0;
     }
 }

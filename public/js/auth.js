@@ -35988,6 +35988,7 @@ var LyricsEditor = /*#__PURE__*/function (_Module) {
       };
       this.Editor = new quill__WEBPACK_IMPORTED_MODULE_1___default.a(this.elem, options);
       this.onSubmitEvent();
+      this.addEditorFunctions();
 
       _get(_getPrototypeOf(LyricsEditor.prototype), "expose", this).call(this, this.Editor);
 
@@ -36001,6 +36002,15 @@ var LyricsEditor = /*#__PURE__*/function (_Module) {
       this.form.addEventListener('submit', function (e) {
         _this2.hiddenInput.value = _this2.Editor.root.innerHTML;
       });
+    }
+  }, {
+    key: "addEditorFunctions",
+    value: function addEditorFunctions() {
+      var _this3 = this;
+
+      this.Editor.addLyrics = function (lyrics) {
+        _this3.Editor.root.innerHTML = lyrics;
+      };
     }
   }]);
 
@@ -36180,7 +36190,7 @@ var LyricsSearcher = /*#__PURE__*/function (_Module) {
         }).then(function (result2) {
           _this3.titleInput.value = result.title;
           _this3.artistInput.value = result.artist;
-          Everclef.Modules.LyricsEditor.root.innerHTML = result2.data;
+          Everclef.Modules.LyricsEditor.addLyrics(result2.data.lyrics);
 
           _this3.hideSearchResults();
 

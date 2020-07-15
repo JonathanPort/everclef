@@ -45,6 +45,8 @@ export default class LyricsEditor extends Module {
 
         this.onSubmitEvent();
 
+        this.addEditorFunctions();
+
         super.expose(this.Editor);
 
         super.logLoaded();
@@ -59,6 +61,17 @@ export default class LyricsEditor extends Module {
             this.hiddenInput.value = this.Editor.root.innerHTML;
 
         });
+
+    }
+
+
+    addEditorFunctions() {
+
+        this.Editor.addLyrics = (lyrics) => {
+
+            this.Editor.root.innerHTML = lyrics;
+
+        };
 
     }
 

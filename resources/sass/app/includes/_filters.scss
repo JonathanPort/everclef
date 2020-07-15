@@ -27,6 +27,16 @@
     user-select: none;
     position: relative;
 
+
+    &--no-click {
+        .filters__icon {
+            margin: 0;
+            width: 22px;
+            height: 18px;
+            opacity: 0.4;
+        }
+    }
+
     &:not(&--no-click) {
 
         .filters__block-inner {
@@ -113,4 +123,3 @@
     width: 12px;
     margin-left: 5px;
 }
-

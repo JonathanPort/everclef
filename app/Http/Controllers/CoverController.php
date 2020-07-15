@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SongRequest;
-use App\Services\AZLyricsService;
+use App\Services\LyricsService\LyricsService;
 use Illuminate\Http\Request;
 use App\Models\Song\Cover;
-use App\Models\Song\Original;
 use Tag;
 use Str;
 
 class CoverController extends Controller
 {
+
+
+    private const LYRICS_PROVIDER = 'AZLyrics';
+
 
     public function __construct()
     {
@@ -25,13 +28,13 @@ class CoverController extends Controller
         $order = $request->order;
         $orderby = $request->orderby;
         $artist = $request->artist;
-        $tag = $request->tag;
+        $tags = $request->tag;
 
         $covers = Cover::query();
 
         if ($artist) $this->artistFilter($artist, $covers);
 
-        if ($tag) $this->tagFilter($tag, $covers);
+        if ($tags) $covers->whereHasTags($tags);
 
         if ($orderby) {
             $covers->orderby($orderby, $order);
@@ -102,6 +105,7 @@ class CoverController extends Controller
         return view('app.covers.cover')->with('cover', $cover);
     }
 
+
     public function showCreateView()
     {
         return view('app.covers.create');
@@ -161,7 +165,7 @@ class CoverController extends Controller
     public function lyricsSearch(Request $request)
     {
 
-        $service = new AZLyricsService();
+        $service = LyricsService::provider(self::LYRICS_PROVIDER);
 
         return response()->json($service->search($request->searchQuery));
 
@@ -171,7 +175,7 @@ class CoverController extends Controller
     public function getLyrics(Request $request)
     {
 
-        $service = new AZLyricsService();
+        $service = LyricsService::provider(self::LYRICS_PROVIDER);
 
         return response()->json($service->getLyrics($request->href));
 

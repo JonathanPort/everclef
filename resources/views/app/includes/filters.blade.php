@@ -4,8 +4,7 @@
 
         <div class="filters__block filters__block--no-click">
             <div class="filters__block-inner">
-                <img class="filters__icon" src="{{ asset('images/icons/filter.png') }}">
-                <span class="filters__text">Filter by</span>
+                <img class="filters__icon" src="{{ asset('images/icons/tune.png') }}">
             </div>
         </div>
 
@@ -42,7 +41,8 @@
 
                 @include('app.includes.filter-menu', [
                     'data' => $f['data'],
-                    'key' => $f['key']
+                    'key' => $f['key'],
+                    'noResultsText' => isset($f['no_results_text']) ? $f['no_results_text'] : 'Nothing to show.',
                 ])
 
             </div>

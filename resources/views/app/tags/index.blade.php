@@ -51,7 +51,10 @@
                                 'id' => 'tag-' . $tag->id,
                                 'actions' => [
                                     ['label' => 'Edit', 'href' => route('tag.edit', ['tag' => $tag->id])],
-                                    ['label' => 'Delete', 'href' => '#'],
+                                    [
+                                        'label' => 'Delete',
+                                        'href' => route('tag.delete', ['tag' => $tag->id])
+                                    ],
                                 ],
                                 'position' => 'right'
                             ])

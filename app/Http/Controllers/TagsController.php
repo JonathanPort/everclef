@@ -41,4 +41,15 @@ class TagsController extends Controller
 
     }
 
+    public function delete(SongTag $tag)
+    {
+
+        $tag->delete();
+
+        return redirect()
+                ->route('tags')
+                ->with('success', trans('messages.tag-delete-success'));
+
+    }
+
 }

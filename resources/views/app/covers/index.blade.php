@@ -13,12 +13,14 @@
                     'artist' => [
                         'label' => 'Artist',
                         'key' => 'artist',
-                        'data' => \Auth::user()->artists()
+                        'data' => \Auth::user()->artists(),
+                        'no_results_text' => 'No artists yet. Add a <a href="' . route('cover.create') . '">cover</a> and your artists will show here.',
                     ],
                     'tag' => [
                         'label' => 'Tag',
                         'key' => 'tag',
-                        'data' => \Auth::user()->tagList()
+                        'data' => \Auth::user()->tagList(),
+                        'no_results_text' => 'No tags yet. Add a <a href="' . route('cover.create') . '">cover</a> and your tags will show here.',
                     ]
                 ]
             ])

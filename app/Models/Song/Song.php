@@ -34,6 +34,24 @@ class Song extends Model
     }
 
 
+    public function scopeWhereHasTags($query, string $tags)
+    {
+
+        if ($tags === 'null') return $this;
+
+        return $query->whereHas('tags', function ($q) use ($tags) {
+
+            if (! \Str::contains($tags, '|')) {
+                $q->where('name', $tags);
+            } else {
+                $q->whereIn('name', explode('|', $tags));
+            }
+
+        });
+
+    }
+
+
     public function tagList(bool $toLower = false)
     {
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\RepertoireController;
 use App\Http\Controllers\CoverController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\SetListController;
+use App\Http\Controllers\DevController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,13 @@ use App\Http\Controllers\SetListController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+if (env('APP_ENV') === 'local') {
+
+    Route::get('/playground', [DevController::class, 'playground']);
+
+}
 
 Route::prefix('/repertoire')->group(function () {
 
@@ -54,6 +62,8 @@ Route::prefix('/tags')->group(function () {
 
     Route::get('/edit/{tag}', [TagsController::class, 'showEditView'])->name('tag.edit');
     Route::post('/edit/{tag}', [TagsController::class, 'edit'])->name('tag.edit.submit');
+
+    Route::get('/delete/{tag}', [TagsController::class, 'delete'])->name('tag.delete');
 
 });
 

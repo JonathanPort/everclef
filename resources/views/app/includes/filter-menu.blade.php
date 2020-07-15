@@ -21,29 +21,39 @@
 
         <div class="filter-menu__body">
 
-            @foreach ($data as $d)
+            @if (! $data)
 
-                <label class="filter-menu__row">
-
-                    <span class="filter-menu__row-text">{{ $d }}</span>
-                    @php
-                    $params = QueryString::paramToArray(\Request::query($key));
-                    @endphp
-                    <input type="checkbox"
-                           value="{{ $d }}"
-                           data-filter-menu-checkbox
-                           @if (in_array($d, $params))
-                           checked
-                           @endif
-                    >
-
-                    <div class="checkbox">
-                        <img src="{{ asset('images/icons/blue-check.png') }}">
-                    </div>
-
+                <label class="filter-menu__row--no-results">
+                    {!! $noResultsText !!}
                 </label>
 
-            @endforeach
+            @else
+
+                @foreach ($data as $d)
+
+                    <label class="filter-menu__row">
+
+                        <span class="filter-menu__row-text">{{ $d }}</span>
+                        @php
+                        $params = QueryString::paramToArray(\Request::query($key));
+                        @endphp
+                        <input type="checkbox"
+                            value="{{ $d }}"
+                            data-filter-menu-checkbox
+                            @if (in_array($d, $params))
+                            checked
+                            @endif
+                        >
+
+                        <div class="checkbox">
+                            <img src="{{ asset('images/icons/blue-check.png') }}">
+                        </div>
+
+                    </label>
+
+                @endforeach
+
+            @endif
 
         </div>
 

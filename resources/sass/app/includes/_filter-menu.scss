@@ -94,6 +94,22 @@
     padding-bottom: 80px;
 }
 
+.filter-menu__row--no-results {
+    padding-top: 40px;
+    font-weight: $font-weight--semibold;
+    font-size: 16px;
+    color: $color--text-secondary;
+    text-align: center;
+    display: block;
+    max-width: 260px;
+    margin: auto;
+
+    a {
+        color: $color--text-primary;
+        text-decoration: none;
+    }
+}
+
 .filter-menu__row {
     display: flex;
     align-items: center;
