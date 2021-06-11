@@ -65,7 +65,7 @@ class AZLyrics implements LyricsInterface
 
     public function getLyrics(string $href) : Lyric
     {
-
+        dd($href);
         $response = Http::get($this->lyricsEndpoint($href));
 
         $dom = new Dom;
