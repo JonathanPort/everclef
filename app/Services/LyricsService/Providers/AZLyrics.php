@@ -18,7 +18,7 @@ class AZLyrics implements LyricsInterface
     public function search(string $query) : Collection
     {
         dump($query);
-        $response = Http::get($this->searchEndpoint($query));
+        $response = Http::withoutVerifying()->get($this->searchEndpoint($query));
         $dom = new Dom;
         dd($response);
         $dom->load($response->body());
