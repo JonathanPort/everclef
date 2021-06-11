@@ -4,6 +4,7 @@ namespace App\Models\Song;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\OwnedByUser;
+use App\Models\Song\Concerns\CanBeAddedToRepertoire;
 
 class Song extends Model
 {

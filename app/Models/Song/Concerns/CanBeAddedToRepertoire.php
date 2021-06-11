@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Models\Song;
+namespace App\Models\Song\Concerns;
+
+use Illuminate\Support\Facades\Auth;
+use App\Models\Song\RepertoireItem;
 
 trait CanBeAddedToRepertoire
 {
@@ -14,7 +17,7 @@ trait CanBeAddedToRepertoire
 
         return RepertoireItem::create([
             'song_id' => $this->id,
-            'user_id' => \Auth::id()
+            'user_id' => Auth::id()
         ]);
 
     }

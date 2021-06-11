@@ -50,6 +50,9 @@ class AZLyrics implements LyricsInterface
             }
 
             if ($match->href && $match->title && $match->artist) {
+
+                $match->title = str_replace('"', '', $match->title);
+
                 $matches[] = $match;
             }
 

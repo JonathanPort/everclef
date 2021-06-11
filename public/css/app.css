@@ -6443,12 +6443,6 @@
   }
 }
 
-@keyframes noty_modal_out {
-  100% {
-    opacity: 0;
-  }
-}
-
 @-webkit-keyframes noty_anim_in {
   100% {
     transform: translate(0);
@@ -6644,6 +6638,8 @@
 
 .tagify {
   --tags-border-color: #DDD;
+  --tags-hover-border-color: #CCC;
+  --tags-focus-border-color: #3595f6;
   --tag-bg: #E5E5E5;
   --tag-hover: #D3E2E2;
   --tag-text-color: black;
@@ -6653,12 +6649,15 @@
   --tag-invalid-color: #D39494;
   --tag-invalid-bg: rgba(211, 148, 148, 0.5);
   --tag-remove-bg: rgba(211, 148, 148, 0.3);
+  --tag-remove-btn-color: black;
   --tag-remove-btn-bg: none;
   --tag-remove-btn-bg--hover: #c77777;
+  --input-color: inherit;
   --tag--min-width: 1ch;
   --tag--max-width: auto;
-  --tag-hide-transition: .3s;
-  --placeholder-color: black;
+  --tag-hide-transition: 0.3s;
+  --placeholder-color: rgba(0, 0, 0, 0.4);
+  --placeholder-color-focus: rgba(0, 0, 0, 0.25);
   --loader-size: .8em;
   display: flex;
   align-items: flex-start;
@@ -6666,10 +6665,11 @@
   border: 1px solid #DDD;
   border: 1px solid var(--tags-border-color);
   padding: 0;
-  line-height: 1.1;
+  line-height: normal;
   cursor: text;
   outline: none;
   position: relative;
+  box-sizing: border-box;
   transition: 0.1s;
 }
 
@@ -6699,37 +6699,38 @@
 
 .tagify:hover {
   border-color: #CCC;
+  border-color: var(--tags-hover-border-color);
 }
 
 .tagify.tagify--focus {
   transition: 0s;
   border-color: #3595f6;
+  border-color: var(--tags-focus-border-color);
 }
 
-.tagify[readonly] {
+.tagify[readonly]:not(.tagify--mix) {
   cursor: default;
 }
 
-.tagify[readonly] > .tagify__input {
+.tagify[readonly]:not(.tagify--mix) > .tagify__input {
   visibility: hidden;
   width: 0;
   margin: 5px 0;
 }
 
-.tagify[readonly] .tagify__tag__removeBtn {
-  display: none;
-}
-
-.tagify[readonly] .tagify__tag > div {
+.tagify[readonly]:not(.tagify--mix) .tagify__tag > div {
   padding: 0.3em 0.5em;
   padding: var(--tag-pad);
 }
 
-.tagify[readonly] .tagify__tag > div::before {
+.tagify[readonly]:not(.tagify--mix) .tagify__tag > div::before {
   background: linear-gradient(45deg, var(--tag-bg) 25%, transparent 25%, transparent 50%, var(--tag-bg) 50%, var(--tag-bg) 75%, transparent 75%, transparent) 0/5px 5px;
   box-shadow: none;
-  -webkit-filter: brightness(0.95);
-          filter: brightness(0.95);
+  filter: brightness(0.95);
+}
+
+.tagify[readonly] .tagify__tag__removeBtn {
+  display: none;
 }
 
 .tagify--loading .tagify__input::before {
@@ -6739,7 +6740,6 @@
 .tagify--loading .tagify__input::after {
   content: "";
   vertical-align: middle;
-  margin: -2px 0 -2px 0.5em;
   opacity: 1;
   width: 0.7em;
   height: 0.7em;
@@ -6750,6 +6750,7 @@
   border-radius: 50%;
   -webkit-animation: rotateLoader 0.4s infinite linear;
           animation: rotateLoader 0.4s infinite linear;
+  margin: -2px 0 -2px 0.5em;
 }
 
 .tagify--loading .tagify__input:empty::after {
@@ -6777,26 +6778,25 @@
   box-sizing: border-box;
   max-width: 100%;
   padding: 0.3em 0.5em;
-  padding: var(--tag-pad);
+  padding: var(--tag-pad, 0.3em 0.5em);
   color: black;
-  color: var(--tag-text-color);
+  color: var(--tag-text-color, black);
   line-height: inherit;
   border-radius: 3px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  white-space: nowrap;
   transition: 0.13s ease-out;
 }
 
 .tagify__tag > div > * {
-  white-space: nowrap;
+  white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
   vertical-align: top;
-  min-width: var(--tag--min-width);
-  max-width: var(--tag--max-width);
+  min-width: 1ch;
+  max-width: auto;
+  min-width: var(--tag--min-width, 1ch);
+  max-width: var(--tag--max-width, auto);
   transition: 0.8s ease, 0.1s color;
 }
 
@@ -6826,7 +6826,7 @@
   -webkit-animation: tags--bump 0.3s ease-out 1;
           animation: tags--bump 0.3s ease-out 1;
   box-shadow: 0 0 0 1.1em #E5E5E5 inset;
-  box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-bg) inset;
+  box-shadow: 0 0 0 var(--tag-inset-shadow-size, 1.1em) var(--tag-bg, #E5E5E5) inset;
 }
 
 .tagify__tag:hover:not([readonly]) div::before {
@@ -6835,15 +6835,40 @@
   bottom: -2px;
   left: -2px;
   box-shadow: 0 0 0 1.1em #D3E2E2 inset;
-  box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-hover) inset;
+  box-shadow: 0 0 0 var(--tag-inset-shadow-size, 1.1em) var(--tag-hover, #D3E2E2) inset;
 }
 
-.tagify__tag.tagify--noAnim > div::before {
+.tagify__tag--loading {
+  pointer-events: none;
+}
+
+.tagify__tag--loading .tagify__tag__removeBtn {
+  display: none;
+}
+
+.tagify__tag--loading::after {
+  --loader-size: .4em;
+  content: "";
+  vertical-align: middle;
+  opacity: 1;
+  width: 0.7em;
+  height: 0.7em;
+  width: var(--loader-size);
+  height: var(--loader-size);
+  border: 3px solid;
+  border-color: #EEE #BBB #888 transparent;
+  border-radius: 50%;
+  -webkit-animation: rotateLoader 0.4s infinite linear;
+          animation: rotateLoader 0.4s infinite linear;
+  margin: 0 0.5em 0 -0.1em;
+}
+
+.tagify__tag--flash div::before {
   -webkit-animation: none;
           animation: none;
 }
 
-.tagify__tag.tagify--hide {
+.tagify__tag--hide {
   width: 0 !important;
   padding-left: 0;
   padding-right: 0;
@@ -6852,11 +6877,15 @@
   opacity: 0;
   transform: scale(0);
   transition: 0.3s;
-  transition: var(--tag-hide-transition);
+  transition: var(--tag-hide-transition, 0.3s);
   pointer-events: none;
 }
 
-.tagify__tag.tagify--mark div::before {
+.tagify__tag--hide > div > * {
+  white-space: nowrap;
+}
+
+.tagify__tag.tagify--noAnim > div::before {
   -webkit-animation: none;
           animation: none;
 }
@@ -6867,7 +6896,7 @@
 
 .tagify__tag.tagify--notAllowed:not(.tagify__tag--editable) div::before {
   box-shadow: 0 0 0 1.1em rgba(211, 148, 148, 0.5) inset !important;
-  box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-invalid-bg) inset !important;
+  box-shadow: 0 0 0 var(--tag-inset-shadow-size, 1.1em) var(--tag-invalid-bg, rgba(211, 148, 148, 0.5)) inset !important;
   transition: 0.2s;
 }
 
@@ -6878,23 +6907,31 @@
 .tagify__tag[readonly] > div::before {
   background: linear-gradient(45deg, var(--tag-bg) 25%, transparent 25%, transparent 50%, var(--tag-bg) 50%, var(--tag-bg) 75%, transparent 75%, transparent) 0/5px 5px;
   box-shadow: none;
-  -webkit-filter: brightness(0.95);
-          filter: brightness(0.95);
+  filter: brightness(0.95);
 }
 
 .tagify__tag--editable > div {
   color: black;
-  color: var(--tag-text-color--edit);
+  color: var(--tag-text-color--edit, black);
 }
 
 .tagify__tag--editable > div::before {
   box-shadow: 0 0 0 2px #D3E2E2 inset !important;
-  box-shadow: 0 0 0 2px var(--tag-hover) inset !important;
+  box-shadow: 0 0 0 2px var(--tag-hover, #D3E2E2) inset !important;
+}
+
+.tagify__tag--editable > .tagify__tag__removeBtn {
+  pointer-events: none;
+}
+
+.tagify__tag--editable > .tagify__tag__removeBtn::after {
+  opacity: 0;
+  transform: translateX(100%) translateX(5px);
 }
 
 .tagify__tag--editable.tagify--invalid > div::before {
   box-shadow: 0 0 0 2px #D39494 inset !important;
-  box-shadow: 0 0 0 2px var(--tag-invalid-color) inset !important;
+  box-shadow: 0 0 0 2px var(--tag-invalid-color, #D39494) inset !important;
 }
 
 .tagify__tag__removeBtn {
@@ -6904,26 +6941,28 @@
   justify-content: center;
   border-radius: 50px;
   cursor: pointer;
-  font: 14px Serif;
+  font: 14px/1 Arial;
   background: none;
-  background: var(--tag-remove-btn-bg);
+  background: var(--tag-remove-btn-bg, none);
   color: black;
-  color: var(--tag-text-color);
+  color: var(--tag-remove-btn-color, black);
   width: 14px;
   height: 14px;
   margin-right: 4.6666666667px;
   margin-left: -4.6666666667px;
+  overflow: hidden;
   transition: 0.2s ease-out;
 }
 
 .tagify__tag__removeBtn::after {
   content: "\D7";
+  transition: 0.3s, color 0s;
 }
 
 .tagify__tag__removeBtn:hover {
   color: white;
   background: #c77777;
-  background: var(--tag-remove-btn-bg--hover);
+  background: var(--tag-remove-btn-bg--hover, #c77777);
 }
 
 .tagify__tag__removeBtn:hover + div > span {
@@ -6932,8 +6971,8 @@
 
 .tagify__tag__removeBtn:hover + div::before {
   box-shadow: 0 0 0 1.1em rgba(211, 148, 148, 0.3) inset !important;
-  box-shadow: 0 0 0 var(--tag-inset-shadow-size) var(--tag-remove-bg) inset !important;
-  transition: 0.2s;
+  box-shadow: 0 0 0 var(--tag-inset-shadow-size, 1.1em) var(--tag-remove-bg, rgba(211, 148, 148, 0.3)) inset !important;
+  transition: box-shadow 0.2s;
 }
 
 .tagify:not(.tagify--mix) .tagify__input br {
@@ -6946,33 +6985,45 @@
 }
 
 .tagify__input {
-  display: block;
+  flex-grow: 1;
+  display: inline-block;
   min-width: 110px;
   margin: 5px;
   padding: 0.3em 0.5em;
   padding: var(--tag-pad, 0.3em 0.5em);
   line-height: inherit;
   position: relative;
-  white-space: pre-line;
+  white-space: pre-wrap;
+  color: inherit;
+  color: var(--input-color, inherit);
+  box-sizing: inherit;
+  /* Seems firefox newer versions don't need this any more
+          @supports ( -moz-appearance:none ){
+              &::before{
+                  line-height: inherit;
+                  position:relative;
+              }
+          }
+  */
   /*
       in "mix mode" the tags are inside the "input" element
   */
 }
 
-.tagify__input::before {
-  display: inline-block;
-  width: 0;
-}
+@-moz-document url-prefix()  {
 
-.tagify__input:empty {
-  display: flex;
 }
 
 .tagify__input:empty::before {
   transition: 0.2s ease-out;
-  opacity: 0.5;
+  opacity: 1;
   transform: none;
+  display: inline-block;
   width: auto;
+}
+
+.tagify--mix .tagify__input:empty::before {
+  display: inline-block;
 }
 
 .tagify__input:focus {
@@ -6983,9 +7034,18 @@
   transition: 0.2s ease-out;
   opacity: 0;
   transform: translatex(6px);
+  /* ALL MS BROWSERS: hide placeholder (on focus) otherwise the caret is places after it, which is weird */
+  /* IE10+ CSS styles go here */
+  /* IE Edge 12+ CSS styles go here */
 }
 
-@supports (-moz-appearance: none) {
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .tagify__input:focus::before {
+    display: none;
+  }
+}
+
+@supports (-ms-ime-align: auto) {
   .tagify__input:focus::before {
     display: none;
   }
@@ -6993,39 +7053,36 @@
 
 .tagify__input:focus:empty::before {
   transition: 0.2s ease-out;
-  opacity: 0.3;
+  opacity: 1;
   transform: none;
+  color: rgba(0, 0, 0, 0.25);
+  color: var(--placeholder-color-focus);
 }
 
-@supports (-moz-appearance: none) {
-  .tagify__input:focus:empty::before {
-    display: inline-block;
+@-moz-document url-prefix()  {
+  .tagify__input:focus:empty::after {
+    display: none;
   }
 }
 
 .tagify__input::before {
   content: attr(data-placeholder);
-  line-height: 1.8;
-  position: absolute;
-  top: 0;
+  height: 1em;
+  line-height: 1em;
+  margin: auto 0;
   z-index: 1;
-  color: black;
+  color: rgba(0, 0, 0, 0.4);
   color: var(--placeholder-color);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
+  position: absolute;
 }
 
 .tagify--mix .tagify__input::before {
+  display: none;
   position: static;
   line-height: inherit;
-}
-
-@supports (-moz-appearance: none) {
-  .tagify__input::before {
-    line-height: inherit;
-    position: relative;
-  }
 }
 
 .tagify__input::after {
@@ -7049,7 +7106,7 @@
 }
 
 .tagify--mix {
-  line-height: 1.7;
+  display: block;
 }
 
 .tagify--mix .tagify__input {
@@ -7057,7 +7114,12 @@
   margin: 0;
   width: 100%;
   height: 100%;
-  line-height: inherit;
+  line-height: 1.5;
+  display: block;
+}
+
+.tagify--mix .tagify__input::before {
+  height: auto;
 }
 
 .tagify--mix .tagify__input::after {
@@ -7111,7 +7173,7 @@
 
 .tagify__dropdown[placement=top] {
   margin-top: 0;
-  transform: translateY(-2px);
+  transform: translateY(-100%);
 }
 
 .tagify__dropdown[placement=top] .tagify__dropdown__wrapper {
@@ -7119,12 +7181,12 @@
   border-bottom-width: 0;
 }
 
-.tagify__dropdown--text {
+.tagify__dropdown[position=text] {
   box-shadow: 0 0 0 3px rgba(var(--tagify-dd-color-primary), 0.1);
   font-size: 0.9em;
 }
 
-.tagify__dropdown--text .tagify__dropdown__wrapper {
+.tagify__dropdown[position=text] .tagify__dropdown__wrapper {
   border-width: 1px;
 }
 
@@ -7135,6 +7197,7 @@
   background: var(--tagify-dd-bg-color);
   border: 1px solid #3595f6;
   border-color: var(--tagify-dd-color-primary);
+  border-width: 1.1px;
   border-top-width: 0;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2);
   transition: 0.25s cubic-bezier(0, 1, 0.5, 1);
@@ -7170,17 +7233,7 @@
 }
 
 .tagify__dropdown__item:active {
-  -webkit-filter: brightness(105%);
-          filter: brightness(105%);
-}
-
-.tagify__dropdown__createTagBtn {
-  width: 100%;
-  background: #3595f6;
-  background: var(--tagify-dd-color-primary);
-  color: white;
-  color: var(--tagify-dd-bg-color);
-  border: none;
+  filter: brightness(105%);
 }
 
 @font-face {
@@ -7571,19 +7624,11 @@ a {
   color: #4B4B4B;
 }
 
-.input input::-webkit-input-placeholder {
-  color: #898A8D;
-}
-
 .input input::-moz-placeholder {
   color: #898A8D;
 }
 
 .input input:-ms-input-placeholder {
-  color: #898A8D;
-}
-
-.input input::-ms-input-placeholder {
   color: #898A8D;
 }
 
@@ -7624,19 +7669,11 @@ a {
   color: #4B4B4B;
 }
 
-.search-input input::-webkit-input-placeholder {
-  color: #898A8D;
-}
-
 .search-input input::-moz-placeholder {
   color: #898A8D;
 }
 
 .search-input input:-ms-input-placeholder {
-  color: #898A8D;
-}
-
-.search-input input::-ms-input-placeholder {
   color: #898A8D;
 }
 
@@ -8902,19 +8939,11 @@ a {
   color: #4B4B4B;
 }
 
-.set-list-maker__name-input::-webkit-input-placeholder {
-  color: #969698;
-}
-
 .set-list-maker__name-input::-moz-placeholder {
   color: #969698;
 }
 
 .set-list-maker__name-input:-ms-input-placeholder {
-  color: #969698;
-}
-
-.set-list-maker__name-input::-ms-input-placeholder {
   color: #969698;
 }
 

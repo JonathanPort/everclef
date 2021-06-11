@@ -3531,12 +3531,6 @@ a {
   }
 }
 
-@keyframes noty_modal_out {
-  100% {
-    opacity: 0;
-  }
-}
-
 @-webkit-keyframes noty_anim_in {
   100% {
     transform: translate(0);
@@ -3799,19 +3793,11 @@ a {
   margin-bottom: 20px;
 }
 
-.login-form__input::-webkit-input-placeholder {
-  color: #898A8D;
-}
-
 .login-form__input::-moz-placeholder {
   color: #898A8D;
 }
 
 .login-form__input:-ms-input-placeholder {
-  color: #898A8D;
-}
-
-.login-form__input::-ms-input-placeholder {
   color: #898A8D;
 }
 
