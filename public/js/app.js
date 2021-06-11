@@ -36294,6 +36294,7 @@ var LyricsSearcher = /*#__PURE__*/function (_Module) {
           _this2.createTimer(function () {
             _this2.showLoadingState();
 
+            console.log(_this2.input.value);
             _utilities_axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/covers/lyrics-search', {
               params: {
                 searchQuery: _this2.input.value

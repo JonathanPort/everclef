@@ -59,7 +59,7 @@ export default class LyricsSearcher extends Module {
                 this.createTimer(() => {
 
                     this.showLoadingState();
-
+                    console.log(this.input.value);
                     Axios.get('/covers/lyrics-search', {
                         params: {searchQuery: this.input.value}
                     })
