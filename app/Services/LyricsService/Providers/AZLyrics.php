@@ -17,10 +17,10 @@ class AZLyrics implements LyricsInterface
 
     public function search(string $query) : Collection
     {
-
+        dump($query);
         $response = Http::get($this->searchEndpoint($query));
         $dom = new Dom;
-
+        dd($response);
         $dom->load($response->body());
 
         $trs = $dom->find('tr');
@@ -65,7 +65,7 @@ class AZLyrics implements LyricsInterface
 
     public function getLyrics(string $href) : Lyric
     {
-        dd($href);
+
         $response = Http::get($this->lyricsEndpoint($href));
 
         $dom = new Dom;
